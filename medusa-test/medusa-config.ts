@@ -12,5 +12,11 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || "supersecret",
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     }
-  }
+  },
+  //modules property whose value is an array of modules to add to the application
+  modules: [
+    {
+      resolve: "./src/modules/brand",
+    },
+  ],
 })
