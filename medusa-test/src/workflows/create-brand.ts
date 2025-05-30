@@ -14,6 +14,11 @@ import {
 import { BRAND_MODULE } from "../modules/brand"
 import BrandModuleService from "../modules/brand/service"
 
+//import EMIT EVENT STEP
+import { 
+  emitEventStep,
+} from "@medusajs/medusa/core-flows"
+
 //CREATE STEP
 export type CreateBrandStepInput = {
   name: string
@@ -61,6 +66,15 @@ export const createBrandWorkflow = createWorkflow(
   "create-brand",
   (input: CreateBrandWorkflowInput) => {  //accepts the workflow's input as a parameter
     const brand = createBrandStep(input)   //invoke createBrandStep 
+
+    //Emit an event step
+    //Accept object with two parameters: eventName, data
+    emitEventStep({
+      eventName: "brand.created",       //Name used to listen to the event
+      data: {                           //Data passed to the subscribers that listen to the event
+        id: brand.id,
+      },
+    })
 
     //must return an instance of WorkflowRepsonse, parameter is the data to return to the workflow's executor
     return new WorkflowResponse(brand)

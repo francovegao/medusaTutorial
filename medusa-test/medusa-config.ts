@@ -18,5 +18,11 @@ module.exports = defineConfig({
     {
       resolve: "./src/modules/brand",
     },
+    {
+      resolve: "./src/modules/cms",              //Third party module
+      options: {                                 //options received in the third party module
+        apiKey: process.env.CMS_API_KEY,
+      },
+    },
   ],
 })
