@@ -9,11 +9,11 @@ type ModuleOptions = {
 export default async function validationLoader({
   options,
 }: LoaderOptions<ModuleOptions>) {
-  //if (!options.apiKey) {
-    if (options) {
-    throw new MedusaError(
-      MedusaError.Types.INVALID_DATA,
-      "Hello Module requires an apiKey option."
-    )
-  }
+   //if (!options.apiKey) {
+  //  if (options) {
+    //throw new MedusaError(
+     // MedusaError.Types.INVALID_DATA,
+     // "Hello Module requires an apiKey option."
+    //)
+ // }
 }

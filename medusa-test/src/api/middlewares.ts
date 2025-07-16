@@ -8,9 +8,12 @@ import {
 import { PostAdminCreateBrand } from "./admin/brands/validators"
 import { z } from "zod"
 import { createFindParams } from "@medusajs/medusa/api/utils/validators"
+import { PostStoreCustomSchema } from "./custom/validators"
 
 //Zod schema that request's query parameters must satisfy
 export const GetBrandsSchema = createFindParams()
+
+export const GetCustomSchema = createFindParams()
 
 //use defineMiddlewares function
 //accepts an object having a routes property which is an array of the middleware objects with three properties
@@ -47,6 +50,34 @@ export default defineMiddlewares({
         ),
       ],
     },
+    {
+      matcher: "/custom",
+      middlewares: [
+        (req, res, next) => {
+          console.log("Global middleware")
+          next()
+        },
+      ],
+    },
+    {
+      matcher: "/custom",
+      method: ["GET"],
+      middlewares: [
+        (req, res, next) => {
+          console.log("Route middleware")
+          next()
+        },
+      ],
+    },
+    {
+      matcher: "/custom",
+      method: "POST",
+      middlewares: [
+        validateAndTransformBody(PostStoreCustomSchema),
+      ],
+    },
+
+
   ],
 })
 
